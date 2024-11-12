@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "tweakeroo-ext",
+  "version": "${version}",
+  "name": "tweakeroo-ext",
+  "description": "No description",
+  "authors": [],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/tweakeroo-ext/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.github.shu.tweakerooExt.client.TweakerooExtClient"
+    ],
+    "main": [
+      "com.github.shu.tweakerooExt.TweakerooExt"
+    ]
+  },
+  "mixins": [
+    "tweakeroo-ext.mixins.json",
+    "tweakeroo-ext-tweakeroo.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric-language-kotlin": ">=${kotlin_loader_version}",
+    "minecraft": "${minecraft_version}"
+  }
+}

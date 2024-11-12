@@ -1,0 +1,14 @@
+{
+  "required": false,
+  "package": "com.github.shu.tweakerooExt.mixins.tweakeroo",
+  "compatibilityLevel": "JAVA_21",
+  "plugin": "com.github.shu.tweakerooExt.MixinPlugin",
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "mixins": [
+    "MiscTweaksMixin"
+  ]
+}
