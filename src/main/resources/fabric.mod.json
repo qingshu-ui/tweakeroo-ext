@@ -21,7 +21,8 @@
   },
   "mixins": [
     "tweakeroo-ext.mixins.json",
-    "tweakeroo-ext-tweakeroo.mixins.json"
+    "tweakeroo-ext-tweakeroo.mixins.json",
+    "tweakeroo-ext-essentialgui.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=${loader_version}",

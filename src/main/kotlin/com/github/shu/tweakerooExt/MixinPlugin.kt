@@ -6,6 +6,7 @@ import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo
 
 var isTweakerooPresent = false
+var isEssentailGUIPresent = false
 const val mixinPackageTweakerooExt = "com.github.shu.tweakerooExt.mixins"
 
 class MixinPlugin : IMixinConfigPlugin {
@@ -13,6 +14,7 @@ class MixinPlugin : IMixinConfigPlugin {
     override fun onLoad(mixinPackage: String?) {
         val loader = FabricLoader.getInstance()
         isTweakerooPresent = loader.isModLoaded("tweakeroo")
+        isEssentailGUIPresent = loader.isModLoaded("essentialgui")
     }
 
 
@@ -24,6 +26,7 @@ class MixinPlugin : IMixinConfigPlugin {
     override fun shouldApplyMixin(targetClassName: String, mixinClassName: String): Boolean {
         if (mixinClassName.startsWith("$mixinPackageTweakerooExt.minecraft")) return true
         if (mixinClassName.startsWith("$mixinPackageTweakerooExt.tweakeroo") && isTweakerooPresent) return true
+        if (mixinClassName.startsWith("$mixinPackageTweakerooExt.essentialgui") && isEssentailGUIPresent) return true
         return false
     }
 

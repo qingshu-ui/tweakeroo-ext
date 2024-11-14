@@ -1,16 +1,15 @@
 {
   "required": false,
-  "package": "com.github.shu.tweakerooExt.mixins.tweakeroo",
+  "package": "com.github.shu.tweakerooExt.mixins.essentialgui",
   "compatibilityLevel": "JAVA_21",
   "plugin": "com.github.shu.tweakerooExt.MixinPlugin",
   "client": [
-    "CameraEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1
   },
   "mixins": [
-    "KeybindStateMixin",
-    "MiscTweaksMixin"
+    "PointedBlockMixin",
+    "PointedEntityMixin"
   ]
 }

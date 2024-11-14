@@ -25,7 +25,10 @@ public abstract class KeybindStateMixin {
 
     @Inject(
             method = "handlePeriodicClick",
-            at = @At("HEAD")
+            at = @At(
+                    value = "INVOKE",
+                    target = "Ljava/util/function/Consumer;accept(Ljava/lang/Object;)V"
+            )
     )
     private void onHandlePeriodicClick(int interval, MinecraftClient mc, CallbackInfo ci) {
         if (keybind == mc.options.attackKey && mc.currentScreen instanceof GenericContainerScreen) {

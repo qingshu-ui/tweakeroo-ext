@@ -40,6 +40,8 @@ dependencies { // To change the versions see the gradle.properties file
     // tweakeroo
     modCompileOnly(files("libs/malilib-fabric-1.21.1-0.21.0.jar"))
     modCompileOnly(files("libs/tweakeroo-fabric-1.21.1-0.21.50.jar"))
+    // EssentialGUI
+    modCompileOnly(files("libs/EssentialGUI-1.10.1+1.21.jar"))
 }
 
 tasks.processResources {
