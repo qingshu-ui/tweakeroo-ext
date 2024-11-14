@@ -4,7 +4,9 @@
   "version": "${version}",
   "name": "tweakeroo-ext",
   "description": "No description",
-  "authors": [],
+  "authors": [
+    "lovelellter"
+  ],
   "contact": {},
   "license": "All-Rights-Reserved",
   "icon": "assets/tweakeroo-ext/icon.png",

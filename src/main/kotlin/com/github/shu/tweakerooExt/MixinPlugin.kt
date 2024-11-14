@@ -22,7 +22,9 @@ class MixinPlugin : IMixinConfigPlugin {
 
 
     override fun shouldApplyMixin(targetClassName: String, mixinClassName: String): Boolean {
-        return mixinClassName.startsWith("$mixinPackageTweakerooExt.tweakeroo")
+        if (mixinClassName.startsWith("$mixinPackageTweakerooExt.minecraft")) return true
+        if (mixinClassName.startsWith("$mixinPackageTweakerooExt.tweakeroo") && isTweakerooPresent) return true
+        return false
     }
 
 
