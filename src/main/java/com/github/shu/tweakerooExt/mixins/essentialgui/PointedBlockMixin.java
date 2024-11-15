@@ -1,35 +1,32 @@
 package com.github.shu.tweakerooExt.mixins.essentialgui;
 
 import com.github.shu.tweakerooExt.tweakeroo.FreeCameraExt;
+import com.github.shu.tweakerooExt.utils.RayCastUtils;
 import fi.dy.masa.tweakeroo.util.CameraEntity;
 import lordrius.essentialgui.gui.hud.PointedBlock;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
-import net.minecraft.util.math.BlockPos;
+import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
+import org.spongepowered.asm.mixin.injection.Redirect;
 
-@Mixin(PointedBlock.class)
+@Mixin(value = PointedBlock.class)
 public abstract class PointedBlockMixin {
 
-    @Shadow
-    private MinecraftClient client;
-
-    @ModifyVariable(
+    @Redirect(
             method = "<init>",
-            at = @At("STORE")
+            at = @At(
+                    value = "FIELD",
+                    target = "Lnet/minecraft/client/MinecraftClient;crosshairTarget:Lnet/minecraft/util/hit/HitResult;",
+                    opcode = Opcodes.GETFIELD
+            )
     )
-    private BlockPos onInit(BlockPos value) {
+    private HitResult onInit(MinecraftClient instance) {
         CameraEntity cameraEntity = FreeCameraExt.getCameraEntity();
-        if (cameraEntity != null) {
-            HitResult hitResult = cameraEntity.raycast(4.5, client.getRenderTickCounter().getTickDelta(true), false);
-            if (hitResult != null && hitResult.getType() == HitResult.Type.BLOCK) {
-                return ((BlockHitResult) hitResult).getBlockPos();
-            }
+        if (null != cameraEntity) {
+            return RayCastUtils.rayCast(instance, cameraEntity);
         }
-        return value;
+        return instance.crosshairTarget;
     }
 }
