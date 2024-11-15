@@ -1,7 +1,6 @@
 package com.github.shu.tweakerooExt.mixins.essentialgui;
 
 import com.github.shu.tweakerooExt.tweakeroo.FreeCameraExt;
-import com.github.shu.tweakerooExt.utils.RayCastUtils;
 import fi.dy.masa.tweakeroo.util.CameraEntity;
 import lordrius.essentialgui.gui.hud.PlayerEquipment;
 import net.minecraft.client.MinecraftClient;
@@ -24,8 +23,8 @@ public abstract class PlayerEquipmentMixin {
     )
     private HitResult onInit(MinecraftClient instance) {
         CameraEntity cameraEntity = FreeCameraExt.getCameraEntity();
-        if (cameraEntity != null) {
-            return RayCastUtils.rayCast(instance, cameraEntity);
+        if (cameraEntity != null && FreeCameraExt.getCrosshairTarget() != null) {
+            return FreeCameraExt.getCrosshairTarget();
         }
         return instance.crosshairTarget;
     }

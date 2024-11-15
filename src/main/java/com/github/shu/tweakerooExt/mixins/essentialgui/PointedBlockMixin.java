@@ -1,8 +1,6 @@
 package com.github.shu.tweakerooExt.mixins.essentialgui;
 
 import com.github.shu.tweakerooExt.tweakeroo.FreeCameraExt;
-import com.github.shu.tweakerooExt.utils.RayCastUtils;
-import fi.dy.masa.tweakeroo.util.CameraEntity;
 import lordrius.essentialgui.gui.hud.PointedBlock;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -24,9 +22,8 @@ public abstract class PointedBlockMixin {
             )
     )
     private HitResult onInit(MinecraftClient instance) {
-        CameraEntity cameraEntity = FreeCameraExt.getCameraEntity();
-        if (null != cameraEntity) {
-            return RayCastUtils.rayCast(instance, cameraEntity);
+        if (null != FreeCameraExt.getCameraEntity() && null != FreeCameraExt.getCrosshairTarget()) {
+            return FreeCameraExt.getCrosshairTarget();
         }
         return instance.crosshairTarget;
     }
@@ -40,9 +37,8 @@ public abstract class PointedBlockMixin {
             )
     )
     private ClientPlayerEntity onDrawPointedBlock(MinecraftClient instance) {
-        CameraEntity cameraEntity = FreeCameraExt.getCameraEntity();
-        if (null != cameraEntity) {
-            return cameraEntity;
+        if (null != FreeCameraExt.getCameraEntity()) {
+            return FreeCameraExt.getCameraEntity();
         }
         return instance.player;
     }

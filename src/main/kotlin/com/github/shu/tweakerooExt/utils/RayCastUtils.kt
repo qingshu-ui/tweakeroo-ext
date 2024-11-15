@@ -16,11 +16,12 @@ import kotlin.math.sqrt
 
 object RayCastUtils {
     @JvmStatic
-    fun rayCast(mc: MinecraftClient, cameraEntity: Entity) = findCrosshairTarget(
+    @JvmOverloads
+    fun rayCast(mc: MinecraftClient, cameraEntity: Entity, tickDelta: Float = 1.0f) = findCrosshairTarget(
         cameraEntity,
         mc.player?.blockInteractionRange ?: 4.5,
         mc.player?.entityInteractionRange ?: 3.0,
-        mc.renderTickCounter.getTickDelta(false)
+        tickDelta
     )
 
     @JvmStatic

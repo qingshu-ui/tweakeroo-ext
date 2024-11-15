@@ -7,6 +7,7 @@
   "mixins": [
   ],
   "client": [
+    "minecraft.GameRendererMixin",
     "minecraft.HandledScreenMixin"
   ],
   "injectors": {
