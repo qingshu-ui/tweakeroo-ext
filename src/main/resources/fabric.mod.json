@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "id": "tweakeroo-ext",
   "version": "${version}",
-  "name": "tweakeroo-ext",
-  "description": "No description",
+  "name": "Tweakeroo-ext",
+  "description": "Extension mod for Tweakeroo",
   "authors": [
     "lovelellter"
   ],

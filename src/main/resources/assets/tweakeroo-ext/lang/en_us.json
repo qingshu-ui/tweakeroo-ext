@@ -2,5 +2,13 @@
   "tweakeroo-ext.config.generic.name.slotClickOnPeriodicAttack": "slotClickOnPeriodicAttack",
   "tweakeroo-ext.config.generic.name.slotClickOnPeriodicUse": "slotClickOnPeriodicUse",
   "tweakeroo-ext.config.generic.comment.slotClickOnPeriodicAttack": "Enable slot clicking on the basic of periodicAttack",
-  "tweakeroo-ext.config.generic.comment.slotClickOnPeriodicUse": "Enable slot clicking on the basic of periodicUse"
+  "tweakeroo-ext.config.generic.comment.slotClickOnPeriodicUse": "Enable slot clicking on the basic of periodicUse",
+  "tweakeroo-ext.label.slot_click_mode.none": "None",
+  "tweakeroo-ext.label.slot_click_mode.pickup": "Pickup",
+  "tweakeroo-ext.label.slot_click_mode.quick_move": "Quick Move",
+  "tweakeroo-ext.label.slot_click_mode.swap": "Swap",
+  "tweakeroo-ext.label.slot_click_mode.clone": "Clone",
+  "tweakeroo-ext.label.slot_click_mode.throw": "Throw",
+  "tweakeroo-ext.label.slot_click_mode.quick_craft": "Quick Craft",
+  "tweakeroo-ext.label.slot_click_mode.pickup_all": "Pickup All"
 }

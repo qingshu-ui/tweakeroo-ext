@@ -6,7 +6,7 @@ import com.google.gson.JsonObject
 import fi.dy.masa.malilib.config.ConfigUtils
 import fi.dy.masa.malilib.config.IConfigBase
 import fi.dy.masa.malilib.config.IConfigHandler
-import fi.dy.masa.malilib.config.options.ConfigBoolean
+import fi.dy.masa.malilib.config.options.ConfigOptionList
 import fi.dy.masa.malilib.util.FileUtils
 import fi.dy.masa.malilib.util.JsonUtils
 import fi.dy.masa.tweakeroo.config.Configs
@@ -42,16 +42,16 @@ class ConfigsExt : IConfigHandler {
 
     object GenericExt {
         @JvmField
-        val SLOT_CLICK_ON_PERIODIC_ATTACK: ConfigBoolean = ConfigBoolean(
+        val SLOT_CLICK_ON_PERIODIC_ATTACK: ConfigOptionList = ConfigOptionList(
             "slotClickOnPeriodicAttack",
-            false,
+            SlotClickMode.NONE,
             "tweakeroo-ext.config.generic.comment.slotClickOnPeriodicAttack"
         ).translatedName("tweakeroo-ext.config.generic.name.slotClickOnPeriodicAttack")
 
         @JvmField
-        val SLOT_CLICK_ON_PERIODIC_USE: ConfigBoolean = ConfigBoolean(
+        val SLOT_CLICK_ON_PERIODIC_USE: ConfigOptionList = ConfigOptionList(
             "slotClickOnPeriodicUse",
-            false,
+            SlotClickMode.NONE,
             "tweakeroo-ext.config.generic.comment.slotClickOnPeriodicUse"
         ).translatedName("tweakeroo-ext.config.generic.name.slotClickOnPeriodicUse")
 

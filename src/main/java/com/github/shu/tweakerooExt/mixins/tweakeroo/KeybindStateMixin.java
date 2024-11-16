@@ -2,6 +2,7 @@ package com.github.shu.tweakerooExt.mixins.tweakeroo;
 
 import com.github.shu.tweakerooExt.mixinInterface.IHandledScreen;
 import com.github.shu.tweakerooExt.tweakeroo.ConfigsExt;
+import com.github.shu.tweakerooExt.tweakeroo.SlotClickMode;
 import fi.dy.masa.malilib.hotkeys.KeybindSettings;
 import fi.dy.masa.malilib.util.GuiUtils;
 import fi.dy.masa.tweakeroo.config.FeatureToggle;
@@ -11,6 +12,7 @@ import net.minecraft.client.option.KeyBinding;
 import net.minecraft.screen.GenericContainerScreenHandler;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.screen.slot.SlotActionType;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -53,7 +55,12 @@ public abstract class KeybindStateMixin {
 
     @Unique
     private void handleSlotClick(MinecraftClient mc, GenericContainerScreen currentScreen) {
-        if ((keybind == mc.options.attackKey && ConfigsExt.GenericExt.SLOT_CLICK_ON_PERIODIC_ATTACK.getBooleanValue() || keybind == mc.options.useKey && ConfigsExt.GenericExt.SLOT_CLICK_ON_PERIODIC_USE.getBooleanValue())) {
+        if (
+                keybind == mc.options.attackKey &&
+                ConfigsExt.GenericExt.SLOT_CLICK_ON_PERIODIC_ATTACK.getOptionListValue() != SlotClickMode.NONE ||
+                keybind == mc.options.useKey &&
+                ConfigsExt.GenericExt.SLOT_CLICK_ON_PERIODIC_USE.getOptionListValue() != SlotClickMode.NONE
+        ) {
             onPeriodicClickHandle(mc, currentScreen);
         }
     }
@@ -73,6 +80,21 @@ public abstract class KeybindStateMixin {
         if (!(client.player.currentScreenHandler instanceof GenericContainerScreenHandler handler)) return;
         Slot slot = ((IHandledScreen) currentScreen).tweakeroo_ext$getFocusedSlot();
         if (slot == null) return;
-        client.interactionManager.clickSlot(handler.syncId, slot.id, 0, SlotActionType.QUICK_MOVE, client.player);
+        SlotActionType action = getActionType(client);
+
+        int button = switch (action) {
+            case SWAP, PICKUP_ALL, QUICK_MOVE, QUICK_CRAFT -> 0;
+            case CLONE -> 2;
+            case THROW, PICKUP -> 1;
+            case null -> 0;
+        };
+        client.interactionManager.clickSlot(handler.syncId, slot.id, button, action, client.player);
+    }
+
+    @Unique
+    private @Nullable SlotActionType getActionType(MinecraftClient client) {
+        return keybind == client.options.useKey ?
+                ((SlotClickMode) ConfigsExt.GenericExt.SLOT_CLICK_ON_PERIODIC_USE.getOptionListValue()).getAction() :
+                ((SlotClickMode) ConfigsExt.GenericExt.SLOT_CLICK_ON_PERIODIC_ATTACK.getOptionListValue()).getAction();
     }
 }
