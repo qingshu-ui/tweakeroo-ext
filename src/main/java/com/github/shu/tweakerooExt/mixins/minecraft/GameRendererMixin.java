@@ -2,9 +2,9 @@ package com.github.shu.tweakerooExt.mixins.minecraft;
 
 import com.github.shu.tweakerooExt.tweakeroo.FreeCameraExt;
 import com.github.shu.tweakerooExt.utils.RayCastUtils;
-import fi.dy.masa.tweakeroo.util.CameraEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.GameRenderer;
+import net.minecraft.entity.Entity;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import org.spongepowered.asm.mixin.Final;
@@ -27,7 +27,7 @@ public abstract class GameRendererMixin {
             at = @At("TAIL")
     )
     private void onUpdateCrosshairTarget(float tickDelta, CallbackInfo ci) {
-        CameraEntity cameraEntity = FreeCameraExt.getCameraEntity();
+        Entity cameraEntity = FreeCameraExt.getCameraEntity();
         if (null != cameraEntity) {
             HitResult hitResult = RayCastUtils.rayCast(client, cameraEntity, tickDelta);
             FreeCameraExt.setCrosshairTarget(hitResult);

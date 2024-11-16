@@ -13,6 +13,7 @@ public abstract class HandledScreenMixin implements IHandledScreen {
     @Shadow
     @Nullable
     protected Slot focusedSlot;
+
     @Shadow
     private @Nullable Slot touchHoveredSlot;
 
@@ -29,7 +30,7 @@ public abstract class HandledScreenMixin implements IHandledScreen {
     @Nullable
     @Override
     public Slot tweakeroo_ext$getTouchHoveredSlot() {
-        return null;
+        return touchHoveredSlot;
     }
 
     @Nullable

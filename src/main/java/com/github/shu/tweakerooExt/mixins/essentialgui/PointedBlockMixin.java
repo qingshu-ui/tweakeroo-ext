@@ -38,7 +38,7 @@ public abstract class PointedBlockMixin {
     )
     private ClientPlayerEntity onDrawPointedBlock(MinecraftClient instance) {
         if (null != FreeCameraExt.getCameraEntity()) {
-            return FreeCameraExt.getCameraEntity();
+            return (ClientPlayerEntity) FreeCameraExt.getCameraEntity();
         }
         return instance.player;
     }

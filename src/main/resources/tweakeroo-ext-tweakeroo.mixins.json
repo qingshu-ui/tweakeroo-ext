@@ -4,12 +4,14 @@
   "compatibilityLevel": "JAVA_21",
   "plugin": "com.github.shu.tweakerooExt.MixinPlugin",
   "client": [
-    "CameraEntityMixin"
+    "CameraEntityMixin",
+    "GuiConfigsMixin"
   ],
   "injectors": {
     "defaultRequire": 1
   },
   "mixins": [
+    "InitHandlerMixin",
     "KeybindStateMixin",
     "MiscTweaksMixin"
   ]

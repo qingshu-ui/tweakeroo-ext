@@ -1,6 +1,10 @@
 package com.github.shu.tweakerooExt.mixins.tweakeroo;
 
 import com.github.shu.tweakerooExt.mixinInterface.IHandledScreen;
+import com.github.shu.tweakerooExt.tweakeroo.ConfigsExt;
+import fi.dy.masa.malilib.hotkeys.KeybindSettings;
+import fi.dy.masa.malilib.util.GuiUtils;
+import fi.dy.masa.tweakeroo.config.FeatureToggle;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.GenericContainerScreen;
 import net.minecraft.client.option.KeyBinding;
@@ -23,22 +27,48 @@ public abstract class KeybindStateMixin {
     @Final
     private KeyBinding keybind;
 
+    @Shadow
+    private int intervalCounter;
+
+    @Shadow
+    private int durationCounter;
+
     @Inject(
             method = "handlePeriodicClick",
             at = @At(
                     value = "INVOKE",
                     target = "Ljava/util/function/Consumer;accept(Ljava/lang/Object;)V"
-            )
+            ),
+            cancellable = true
     )
     private void onHandlePeriodicClick(int interval, MinecraftClient mc, CallbackInfo ci) {
-        if (keybind == mc.options.attackKey && mc.currentScreen instanceof GenericContainerScreen) {
-            onPeriodicClickHandle(mc);
+        if (GuiUtils.getCurrentScreen() instanceof GenericContainerScreen currentScreen) {
+            ci.cancel();
+            handleUseClick(mc);
+            handleSlotClick(mc, currentScreen);
+            intervalCounter = 0;
+            durationCounter = 0;
         }
     }
 
     @Unique
-    private void onPeriodicClickHandle(MinecraftClient client) {
-        if (client.player == null || client.interactionManager == null || !(client.currentScreen instanceof GenericContainerScreen currentScreen))
+    private void handleSlotClick(MinecraftClient mc, GenericContainerScreen currentScreen) {
+        if ((keybind == mc.options.attackKey && ConfigsExt.GenericExt.SLOT_CLICK_ON_PERIODIC_ATTACK.getBooleanValue() || keybind == mc.options.useKey && ConfigsExt.GenericExt.SLOT_CLICK_ON_PERIODIC_USE.getBooleanValue())) {
+            onPeriodicClickHandle(mc, currentScreen);
+        }
+    }
+
+    @Unique
+    private void handleUseClick(MinecraftClient mc) {
+        if (keybind == mc.options.useKey && FeatureToggle.TWEAK_PERIODIC_USE.getKeybind().getSettings().getContext() != KeybindSettings.Context.ANY) {
+            FeatureToggle.TWEAK_PERIODIC_USE.setBooleanValue(false);
+            FeatureToggle.TWEAK_PERIODIC_USE.onValueChanged();
+        }
+    }
+
+    @Unique
+    private void onPeriodicClickHandle(MinecraftClient client, GenericContainerScreen currentScreen) {
+        if (client.player == null || client.interactionManager == null || !(currentScreen instanceof GenericContainerScreen))
             return;
         if (!(client.player.currentScreenHandler instanceof GenericContainerScreenHandler handler)) return;
         Slot slot = ((IHandledScreen) currentScreen).tweakeroo_ext$getFocusedSlot();

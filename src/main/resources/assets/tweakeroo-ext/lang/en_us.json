@@ -1,0 +1,6 @@
+{
+  "tweakeroo-ext.config.generic.name.slotClickOnPeriodicAttack": "slotClickOnPeriodicAttack",
+  "tweakeroo-ext.config.generic.name.slotClickOnPeriodicUse": "slotClickOnPeriodicUse",
+  "tweakeroo-ext.config.generic.comment.slotClickOnPeriodicAttack": "Enable slot clicking on the basic of periodicAttack",
+  "tweakeroo-ext.config.generic.comment.slotClickOnPeriodicUse": "Enable slot clicking on the basic of periodicUse"
+}

@@ -38,7 +38,7 @@ public abstract class PointedEntityMixin {
     )
     private ClientPlayerEntity onDrawPlayerSkin(MinecraftClient instance) {
         if (null != FreeCameraExt.getCameraEntity()) {
-            return FreeCameraExt.getCameraEntity();
+            return (ClientPlayerEntity) FreeCameraExt.getCameraEntity();
         }
         return instance.player;
     }
@@ -53,7 +53,7 @@ public abstract class PointedEntityMixin {
     )
     private ClientPlayerEntity onGetEntityExtendedProperties(MinecraftClient instance) {
         if (null != FreeCameraExt.getCameraEntity()) {
-            return FreeCameraExt.getCameraEntity();
+            return (ClientPlayerEntity) FreeCameraExt.getCameraEntity();
         }
         return instance.player;
     }
@@ -69,7 +69,7 @@ public abstract class PointedEntityMixin {
     )
     private ClientPlayerEntity onIsFoxTrustingPlayer(MinecraftClient instance) {
         if (null != FreeCameraExt.getCameraEntity()) {
-            return FreeCameraExt.getCameraEntity();
+            return (ClientPlayerEntity) FreeCameraExt.getCameraEntity();
         }
         return instance.player;
     }

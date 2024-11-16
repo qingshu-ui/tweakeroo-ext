@@ -4,6 +4,7 @@
   "compatibilityLevel": "JAVA_21",
   "plugin": "com.github.shu.tweakerooExt.MixinPlugin",
   "client": [
+    "WorldRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
