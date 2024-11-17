@@ -8,7 +8,8 @@
   ],
   "client": [
     "minecraft.GameRendererMixin",
-    "minecraft.HandledScreenMixin"
+    "minecraft.HandledScreenMixin",
+    "minecraft.MinecraftClientMixin"
   ],
   "injectors": {
     "defaultRequire": 1

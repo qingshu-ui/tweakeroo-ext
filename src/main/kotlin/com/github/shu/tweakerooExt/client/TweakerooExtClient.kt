@@ -6,5 +6,6 @@ import net.fabricmc.api.ClientModInitializer
 class TweakerooExtClient : ClientModInitializer {
 
     override fun onInitializeClient() {
+        Reference.init()
     }
 }
