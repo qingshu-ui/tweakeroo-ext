@@ -29,10 +29,10 @@ public abstract class KeybindStateMixin {
     @Final
     private KeyBinding keybind;
 
-    @Shadow
+    @Shadow(remap = false)
     private int intervalCounter;
 
-    @Shadow
+    @Shadow(remap = false)
     private int durationCounter;
 
     @Inject(

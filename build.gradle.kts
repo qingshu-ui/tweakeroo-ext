@@ -8,7 +8,6 @@ val minecraft_version: String by project
 val yarn_mappings: String by project
 val loader_version: String by project
 val kotlin_loader_version: String by project
-val reflections_version: String by project
 
 plugins {
     kotlin("jvm") version "2.0.21"
@@ -29,12 +28,18 @@ java {
     withSourcesJar()
 }
 
-
 repositories {
     maven("https://jitpack.io")
 }
 
-dependencies { // To change the versions see the gradle.properties file
+val library: Configuration by configurations.creating
+configurations {
+    implementation {
+        extendsFrom(library)
+    }
+}
+
+dependencies {
     minecraft("com.mojang:minecraft:$minecraft_version")
     mappings("net.fabricmc:yarn:$yarn_mappings:v2")
     modImplementation("net.fabricmc:fabric-loader:$loader_version")
@@ -47,39 +52,44 @@ dependencies { // To change the versions see the gradle.properties file
     modCompileOnly(files("libs/EssentialGUI-1.10.1+1.21.jar"))
 
     // library
-    implementation("com.github.qingshu-ui:orbit:$orbit_version")
-    implementation("org.reflections:reflections:$reflections_version")
+    library("com.github.qingshu-ui:orbit:$orbit_version")
 }
 
-tasks.processResources {
-    inputs.property("version", project.version)
-    inputs.property("minecraft_version", minecraft_version)
-    inputs.property("loader_version", loader_version)
-    filteringCharset = "UTF-8"
-
-    filesMatching("fabric.mod.json") {
-        expand(
+tasks {
+    processResources {
+        val properties = mapOf(
             "version" to project.version,
             "minecraft_version" to minecraft_version,
             "loader_version" to loader_version,
-            "kotlin_loader_version" to kotlin_loader_version
+            "kotlin_loader_version" to kotlin_loader_version,
         )
+        inputs.properties(properties)
+        filteringCharset = "UTF-8"
+
+        filesMatching("fabric.mod.json") {
+            expand(properties)
+        }
     }
-}
 
-tasks.withType<JavaCompile>()
-    .configureEach {
-        options.encoding = "UTF-8"
-        options.release.set(targetJavaVersion)
+    jar {
+        from("LICENSE") {
+            rename { "${it}_${project.base.archivesName}" }
+        }
+        from(library.map { if (it.isDirectory) it else zipTree(it) })
     }
 
-tasks.withType<KotlinCompile>().configureEach {
-    compilerOptions.jvmTarget.set(JvmTarget.fromTarget(targetJavaVersion.toString()))
-}
+    withType<KotlinCompile>().configureEach {
+        compilerOptions.jvmTarget.set(JvmTarget.fromTarget(targetJavaVersion.toString()))
+    }
 
-tasks.jar {
-    from("LICENSE") {
-        rename { "${it}_${project.base.archivesName}" }
+    withType<JavaCompile>()
+        .configureEach {
+            options.encoding = "UTF-8"
+            options.release.set(targetJavaVersion)
+        }
+
+    withType<Jar> {
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     }
 }
 
