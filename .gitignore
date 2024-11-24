@@ -120,3 +120,6 @@ runs/
 
 # kotlin
 .kotlin
+
+# Other
+!libs/*.jar
