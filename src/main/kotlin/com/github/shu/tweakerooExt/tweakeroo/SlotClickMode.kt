@@ -8,8 +8,7 @@ enum class SlotClickMode(
     private val configString: String,
     private val translationKey: String,
     val action: SlotActionType?
-) :
-    IConfigOptionListEntry {
+) : IConfigOptionListEntry {
 
     NONE("none", "tweakeroo-ext.label.slot_click_mode.none", null),
     PICKUP("pickup", "tweakeroo-ext.label.slot_click_mode.pickup", SlotActionType.PICKUP),
