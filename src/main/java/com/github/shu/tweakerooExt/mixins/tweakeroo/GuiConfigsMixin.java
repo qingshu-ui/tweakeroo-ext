@@ -7,9 +7,6 @@ import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.tweakeroo.gui.GuiConfigs;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyArg;
-
-import java.util.Collection;
 
 @Mixin(value = GuiConfigs.class)
 public abstract class GuiConfigsMixin {
@@ -24,18 +21,5 @@ public abstract class GuiConfigsMixin {
     )
     private ImmutableList<IConfigBase> onGetGeneric(ImmutableList<IConfigBase> original) {
         return ConfigsExt.add(original, ConfigsExt.GenericExt.OPTIONS);
-    }
-
-    @ModifyArg(
-            method = "getConfigs",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lfi/dy/masa/malilib/gui/GuiConfigsBase$ConfigOptionWrapper;createFor(Ljava/util/Collection;)Ljava/util/List;",
-                    ordinal = 0
-            ),
-            remap = false
-    )
-    private Collection<? extends IConfigBase> onGetDisables(Collection<? extends IConfigBase> original) {
-        return ConfigsExt.add(original, ConfigsExt.DisableExt.OPTIONS);
     }
 }

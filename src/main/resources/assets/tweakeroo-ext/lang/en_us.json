@@ -10,7 +10,5 @@
   "tweakeroo-ext.label.slot_click_mode.clone": "Clone",
   "tweakeroo-ext.label.slot_click_mode.throw": "Throw",
   "tweakeroo-ext.label.slot_click_mode.quick_craft": "Quick Craft",
-  "tweakeroo-ext.label.slot_click_mode.pickup_all": "Pickup All",
-  "tweakeroo-ext.config.disable.comment.disableDarkness": "Disable DARKNESS effect.",
-  "tweakeroo-ext.config.disable.name.disableDarkness": "disableDarkness"
+  "tweakeroo-ext.label.slot_click_mode.pickup_all": "Pickup All"
 }
