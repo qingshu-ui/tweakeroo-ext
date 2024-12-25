@@ -46,8 +46,8 @@ dependencies {
     modImplementation("net.fabricmc:fabric-language-kotlin:$kotlin_loader_version")
 
     // tweakeroo
-    modCompileOnly(files("libs/malilib-fabric-1.21.1-0.21.0.jar"))
-    modCompileOnly(files("libs/tweakeroo-fabric-1.21.1-0.21.50.jar"))
+    modCompileOnly(files("libs/malilib-fabric-1.21-0.21.5.jar"))
+    modCompileOnly(files("libs/tweakeroo-fabric-1.21-0.21.55.jar"))
     // EssentialGUI
     modCompileOnly(files("libs/EssentialGUI-1.10.1+1.21.jar"))
 
