@@ -8,6 +8,7 @@ val minecraft_version: String by project
 val yarn_mappings: String by project
 val loader_version: String by project
 val kotlin_loader_version: String by project
+val malilib_version: String by project
 
 plugins {
     kotlin("jvm") version "2.0.21"
@@ -30,6 +31,7 @@ java {
 
 repositories {
     maven("https://jitpack.io")
+    maven("https://masa.dy.fi/maven")
 }
 
 val library: Configuration by configurations.creating
@@ -46,7 +48,7 @@ dependencies {
     modImplementation("net.fabricmc:fabric-language-kotlin:$kotlin_loader_version")
 
     // tweakeroo
-    modCompileOnly(files("libs/malilib-fabric-1.21-0.21.5.jar"))
+    modCompileOnly("fi.dy.masa.malilib:malilib-fabric-$minecraft_version:$malilib_version")
     modCompileOnly(files("libs/tweakeroo-fabric-1.21-0.21.55.jar"))
     // EssentialGUI
     modCompileOnly(files("libs/EssentialGUI-1.10.1+1.21.jar"))

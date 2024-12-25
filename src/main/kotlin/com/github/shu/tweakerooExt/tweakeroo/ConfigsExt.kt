@@ -26,6 +26,7 @@ class ConfigsExt : IConfigHandler {
                 val root = JsonObject()
                 ConfigUtils.writeConfigBase(root, "Generic", OPTIONS)
                 ConfigUtils.writeHotkeyToggleOptions(root, "DisableHotkeys", "DisableToggles", DisableExt.OPTIONS)
+                ConfigUtils.writeHotkeyToggleOptions(root, "TweakHotkeys", "ToggleHotkeys", FeatureToggleExt.VALUES)
                 JsonUtils.writeJsonToFile(root, File(dir, CONFIG_FILE_NAME))
             }
         }
@@ -39,6 +40,7 @@ class ConfigsExt : IConfigHandler {
                     val root = element.asJsonObject
                     ConfigUtils.readConfigBase(root, "Generic", OPTIONS)
                     ConfigUtils.readHotkeyToggleOptions(root, "DisableHotkeys", "DisableToggles", DisableExt.OPTIONS)
+                    ConfigUtils.readHotkeyToggleOptions(root, "TweakHotkeys", "ToggleHotkeys", FeatureToggleExt.VALUES)
                 }
             }
         }

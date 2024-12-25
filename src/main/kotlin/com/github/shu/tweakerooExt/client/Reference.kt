@@ -7,6 +7,7 @@ import java.lang.reflect.Method
 
 object Reference {
     const val MOD_ID = "tweakeroo-ext"
+    @JvmField
     val mc: MinecraftClient = MinecraftClient.getInstance()
 
     @JvmField

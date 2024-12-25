@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_21",
   "plugin": "com.github.shu.tweakerooExt.MixinPlugin",
   "mixins": [
+    "minecraft.LivingEntityMixin"
   ],
   "client": [
     "minecraft.BackgroundRendererStatusEffectFogModifierMixin",
