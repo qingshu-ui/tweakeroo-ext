@@ -7,9 +7,12 @@
   "mixins": [
   ],
   "client": [
+    "minecraft.BackgroundRendererStatusEffectFogModifierMixin",
     "minecraft.GameRendererMixin",
     "minecraft.HandledScreenMixin",
-    "minecraft.MinecraftClientMixin"
+    "minecraft.LightMapTextureManagerMixin",
+    "minecraft.MinecraftClientMixin",
+    "minecraft.WorldRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

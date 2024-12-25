@@ -12,6 +12,7 @@
   },
   "mixins": [
     "InitHandlerMixin",
+    "InputHandlerMixin",
     "KeybindStateMixin",
     "MiscTweaksMixin"
   ]
